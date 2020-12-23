@@ -161,6 +161,7 @@ class SVGSkin extends Skin {
      * @fires Skin.event:WasAltered
      */
     resetMIPs () {
+        if (this._scaledMIPs.length === 0) return;
         this._scaledMIPs.forEach(oldMIP => this._renderer.gl.deleteTexture(oldMIP));
         this._scaledMIPs.length = 0;
         this._largestMIPScale = 0;
@@ -194,6 +195,10 @@ class SVGSkin extends Skin {
 
             this.emit(Skin.Events.WasAltered);
         });
+    }
+
+    cleanup () {
+        this.resetMIPs();
     }
 
 }

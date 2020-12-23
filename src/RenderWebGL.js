@@ -87,6 +87,10 @@ const colorMatches = (a, b, offset) => (
  */
 const FENCE_WIDTH = 15;
 
+/**
+ * Milliseconds after which an unused skin can be cleaned up.
+ */
+const CLEANUP_INTERVAL = 1000 * 30;
 
 class RenderWebGL extends EventEmitter {
     /**
@@ -223,6 +227,8 @@ class RenderWebGL extends EventEmitter {
         /** @todo disable when no partial transparency? */
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+
+        this.cleanupInterval = setInterval(this.cleanupSkins.bind(this), CLEANUP_INTERVAL);
     }
 
     // tw: implement high quality pen option
@@ -240,6 +246,16 @@ class RenderWebGL extends EventEmitter {
                 } else {
                     skin.setRenderQuality(1);
                 }
+            }
+        }
+    }
+
+    cleanupSkins () {
+        for (const skin of this._allSkins) {
+            if (skin.used) {
+                skin.used = false;
+            } else {
+                skin.cleanup();
             }
         }
     }
@@ -1901,6 +1917,8 @@ class RenderWebGL extends EventEmitter {
 
             // If the skin or texture isn't ready yet, skip it.
             if (!drawable.skin || !drawable.skin.getTexture(drawableScale)) continue;
+
+            drawable.skin.used = true;
 
             const uniforms = {};
 

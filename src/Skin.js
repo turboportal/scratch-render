@@ -50,6 +50,8 @@ class Skin extends EventEmitter {
         this._silhouette = new Silhouette();
 
         this.setMaxListeners(RenderConstants.SKIN_SHARE_SOFT_LIMIT);
+
+        this.used = false;
     }
 
     /**
@@ -216,6 +218,13 @@ class Skin extends EventEmitter {
      */
     isTouchingLinear (vec) {
         return this._silhouette.isTouchingLinear(vec);
+    }
+
+    /**
+     * Called when a skin has not been used for a while and it should cleanup any unnecessary memory.
+     */
+    cleanup () {
+
     }
 
 }
