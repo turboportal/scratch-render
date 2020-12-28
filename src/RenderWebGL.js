@@ -252,10 +252,12 @@ class RenderWebGL extends EventEmitter {
 
     cleanupSkins () {
         for (const skin of this._allSkins) {
-            if (skin.used) {
-                skin.used = false;
-            } else {
-                skin.cleanup();
+            if (skin) {
+                if (skin.used) {
+                    skin.used = false;
+                } else {
+                    skin.cleanup();
+                }
             }
         }
     }
