@@ -215,7 +215,7 @@ class Drawable {
         if (this._position[0] !== position[0] ||
             this._position[1] !== position[1]) {
             // tw: implement high quality render
-            if (this._highQuality) {
+            if (false && this._highQuality) {
                 this._position[0] = position[0];
                 this._position[1] = position[1];
             } else {
