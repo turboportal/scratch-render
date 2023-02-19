@@ -1,6 +1,6 @@
-# TurboWarp/scratch-render
+# scratch-render
 
-scratch-render modified for use in [TurboWarp](https://turbowarp.org/). We've optimized some operations and added a lot of options.
+we literally are adding 3D
 
 ## Setup
 
@@ -10,7 +10,7 @@ If you just want to play with the render then it's the same process as upstream 
 
 ## API
 
-Public APIs are compatible with a vanilla scratch-render. TurboWarp/scratch-render is a drop-in replacement for scratch-render.
+Public APIs are compatible with a vanilla scratch-render. turboportal/scratch-render is a fork of TurboWarp/scratch-render which is a drop-in replacement for scratch-render.
 
 Notable public API additions include:
 
